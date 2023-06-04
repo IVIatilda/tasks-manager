@@ -1,0 +1,27 @@
+<!-- <div class="modal-header">
+  <h4 class="modal-title" id="modal-title">Удалить задачу</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-describedby="modal-title"
+    (click)="dialogRef.close()"
+  ></button>
+</div>
+<div class="modal-body">
+  <p> Вы действительно хотите удалить задачу <span class="text-primary">"{{ task.title }}"</span>?</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="dialogRef.close()">Отмена</button>
+  <button type="button" class="btn btn-danger" (click)="deleteTask(task)">Удалить</button>
+</div> -->
+
+<h2 id="modal-title">Удалить задачу</h2>
+<p>Вы действительно хотите удалить задачу <span class="text-primary">"{{ task.title }}"</span>?</p>
+<div>
+  <button mat-flat-button (click)="dialogRef.close()">
+    Отмена
+  </button>
+  <button mat-flat-button color="warn" (click)="deleteTask(task)">
+    Удалить
+  </button>
+</div>

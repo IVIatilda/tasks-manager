@@ -1,0 +1,40 @@
+.tasks-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.tasks-list-header h1 {
+  margin: 0;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 15px;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.mat-expansion-panel .mat-expansion-panel-header.overdue-deadline {
+  background-color: red;
+  color: #fff;
+}
+
+.mat-expansion-panel .mat-expansion-panel-header.overdue-deadline .mat-expansion-panel-header-title,
+.mat-expansion-panel .mat-expansion-panel-header.overdue-deadline .mat-expansion-panel-header-description {
+  color: #fff;
+}
+
+.mat-expansion-panel .mat-expansion-panel-header.near-deadline {
+  background-color: orange;
+}
+
+.mat-mdc-slide-toggle {
+  margin-bottom: 20px;
+}

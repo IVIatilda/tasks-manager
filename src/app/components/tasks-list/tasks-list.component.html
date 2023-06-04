@@ -1,0 +1,96 @@
+<div class="tasks-list-header">
+  <h1>Задачи</h1>
+  <button
+    mat-mini-fab
+    color="accent"
+    matTooltip="Добавить новую"
+    (click)="openModal($event, 'formModal')"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<mat-slide-toggle [(ngModel)]="hideComplete">
+  Скрыть выполненные
+</mat-slide-toggle>
+
+<p *ngIf="!currentsTasksCount">Нет текущих задач.</p>
+
+<mat-accordion cdkDropList (cdkDropListDropped)="drop($event)">
+  <ng-container *ngFor="let task of tasks">
+    <mat-expansion-panel
+      cdkDrag
+      (opened)="openPanel = task.id"
+      (closed)="openPanel = null"
+      *ngIf="!task.complete"
+    >
+      <mat-expansion-panel-header [appDeadline]="task.deadline">
+        <mat-panel-title>
+          {{ task.title }}
+        </mat-panel-title>
+        <mat-panel-description>
+          Дедлайн: {{ task.deadline | date : "dd.MM.YYYY" }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="task-item">
+        <div class="task-description">
+          {{ task.description }}
+        </div>
+        <div class="task-buttons">
+          <button
+            mat-mini-fab
+            color="accent"
+            matTooltip="Отметить как выполненную"
+            (click)="setDone($event, task)"
+          >
+            <mat-icon>done</mat-icon>
+          </button>
+          <button
+            mat-mini-fab
+            color="primary"
+            matTooltip="Редактировать"
+            (click)="openModal($event, 'formModal', task)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-mini-fab
+            color="warn"
+            matTooltip="Удалить"
+            (click)="openModal($event, 'confirmModal', task)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel
+      (opened)="openPanel = task.id"
+      (closed)="openPanel = null"
+      *ngIf="task.complete && !hideComplete"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <s>{{ task.title }}</s>
+        </mat-panel-title>
+        <mat-panel-description>
+          Закрыта: {{ task.complete | date : "dd.MM.YYYY" }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="task-item">
+        <div class="task-description">
+          {{ task.description }}
+        </div>
+        <div class="task-buttons">
+          <button
+            mat-mini-fab
+            color="primary"
+            matTooltip="Вернуть в работу"
+            (click)="returnTask($event, task)"
+          >
+            <mat-icon>replay</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </ng-container>
+</mat-accordion>

@@ -1,0 +1,32 @@
+<h2 *ngIf="task?.id; else newTask">Редактировать задачу</h2>
+<ng-template #newTask>
+  <h2>Новая задача</h2>
+</ng-template>
+<form [formGroup]="taskForm" novalidate>
+  <mat-form-field class="full-width">
+    <mat-label>Название</mat-label>
+    <input matInput formControlName="title">
+    <mat-error *ngIf="taskForm.get('title')?.hasError('required')">
+      Название обязательно
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Дедлайн</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="deadline">
+    <mat-error *ngIf="taskForm.get('deadline')?.hasError('required')">
+      Дедлайн обязателен
+    </mat-error>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Описание</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+</form>
+<div>
+  <button mat-flat-button color="primary" (click)="saveTask()">
+    Сохранить
+  </button>
+  <button mat-flat-button (click)="dialogRef.close()">Отмена</button>
+</div>
