@@ -40,7 +40,7 @@ export class TasksListComponent implements OnInit {
     return this.tasks.filter(t => !t.complete).length;
   }
 
-  openModal(event: any, name: string, task?: Task) {
+  openModal(event: MouseEvent, name: string, task?: Task) {
     event.stopPropagation();
     this.dialog.open<string>(MODALS[name], {
       width: '450px',
@@ -48,13 +48,13 @@ export class TasksListComponent implements OnInit {
     });
   }
 
-  setDone(event: any, task: Task) {
+  setDone(event: MouseEvent, task: Task) {
     event.stopPropagation();
     task.complete = new Date();
     this.taskService.updateTask(task);
   }
 
-  returnTask(event: any, task: Task) {
+  returnTask(event: MouseEvent, task: Task) {
     event.stopPropagation();
     delete task.complete;
     this.taskService.updateTask(task);
